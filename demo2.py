@@ -1,14 +1,16 @@
 import tensorflow as tf
 from tensorflow import keras
+import numbers
 # from tensorflow.optimizers import AdamOptimizer
 
 # The Fashion MNIST data is available directly in the tf.keras datasets API
-fashion_mnist = keras.datasets.fashion_mnist
+mnist = keras.datasets.fashion_mnist
 
 # Calling load_data on this object will give you two sets of two lists,
 # these will be the training and testing values for the graphics that contain the clothing items and their labels.
-(train_images, train_labels), (test_images,
-                               test_labels) = fashion_mnist.load_data()
+(training_images, training_labels), (test_images, test_labels) = mnist.load_data()
+training_images = training_images/255.0
+test_images = test_images/255.0
 
 
 # Sequential: That defines a SEQUENCE of layers in the neural network
@@ -25,12 +27,13 @@ model = keras.Sequential([keras.layers.Flatten(input_shape=(28, 28)),
                           keras.layers.Dense(10, activation=tf.nn.softmax)])
 
 model.compile(optimizer=tf.optimizers.Adam(),
-              loss='sparse_categorical_crossentropy')
+              loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-model.fit(train_images, train_labels, epochs=20)
+model.fit(training_images, training_labels, epochs=20)
 
-model.evaluate(test_images, test_labels)
-
+# model.evaluate(test_images, test_labels)
 # classifications = model.predict(test_images)
+# print(test_labels[0])
 
-print(test_labels[0])
+test_loss, test_accuracy = model.evaluate(test_images, test_labels)
+print('Test loss: {}, Test accuracy: {}'.format(test_loss, test_accuracy*100))
