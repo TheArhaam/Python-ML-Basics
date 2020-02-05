@@ -27,4 +27,14 @@ res = model.predict([20])[0][0].astype(float)
 print(round(res))
 
 # Saving the model
-model.save('demo6model.h5')
+try:
+    model.save('demo6model.h5')
+    print('Model Saved.')
+except Exception as e:
+    print('Unable to save model.')
+
+# I ran the program 5 times
+# Basically trained the model over the last save itself 5 times
+# This allowed me to not need to increase the epochs and restart from the beginning
+# I could just pick up from where I last left off
+# So once I ran it 5 times I was starting to get the accurate result
