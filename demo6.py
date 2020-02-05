@@ -11,8 +11,14 @@ model.compile(optimizer='sgd',loss='mean_squared_error')
 arr1 = np.array([1,2,3,4,5,6,7,8,9,10])
 arr2 = np.array([6,7,8,9,10,11,12,13,14,15])
 
+# 200 epochs not enough we still get loss: 0.8
+# So we will save the model and load it so that we don't have to 
+# restart the training from the beginning but where we left off instead
 model.fit(arr1,arr2,epochs=200)
 
 res = model.predict([20])[0][0].astype(float)
 
-print(res)
+print(round(res))
+
+# Saving the model
+model.save('demo6model.h5')
