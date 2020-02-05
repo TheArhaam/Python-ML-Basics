@@ -4,7 +4,13 @@ import tensorflow as tf
 import numpy as np
 from tensorflow import keras
 
-model = keras.Sequential([keras.layers.Dense(units=1,input_shape=[1])])
+try:
+    # Loading the model from memory if found
+    model = keras.models.load_model('demo6model.h5')
+except Exception as e:
+    # Creating a new model if model not found
+    print('Model not found, creating new model.')
+    model = keras.Sequential([keras.layers.Dense(units=1,input_shape=[1])])
 
 model.compile(optimizer='sgd',loss='mean_squared_error')
 
