@@ -3,4 +3,5 @@ A repository consisting of all the demo programs I will be creating to learn mor
 <p align="center">
   <img src="assets/PythonLogo.png" width="100">
   <img src="assets/TensorflowLogo.png" height="100">
+  <img src="assets/KerasLogo.jpg" height="100">
 <p>
